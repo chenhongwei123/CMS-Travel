@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>发布商品</title>
+		<link rel="stylesheet" type="text/css" href="../css/PCreset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/lib/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="../css/lib/laydate.css" />-->
+		<link rel="stylesheet" type="text/css" href="../css/lib/laydate/theme/default/laydate.css" />
+		<link rel="stylesheet" type="text/css" href="../css/lib/jquery.tag-editor.css" />
+
+		<script src="../js/lib/jQuery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/bootstrap/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/tag-editor/jquery.tag-editor.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../js/lib/jQuery/laydate.dev.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="../js/lib/jQuery/laydate.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/upfile.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery.cookie.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery-time.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery-jtemplates.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/send_commodity.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.upload-img {
+				width: 200px;
+				height: 100px;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			
+			img {
+				border: 0
+			}
+			
+			h5 {
+				color: #000000;
+				font-weight: 900;
+			}
+			
+			.form-group {
+				padding: 10px 0px;
+			}
+			
+			.upfile {
+				position: relative;
+				width: 200px;
+				display: inline-block;
+				height: 100px;
+				margin: 15px;
+				float: left;
+			}
+			
+			.upfile .fileimgAccount {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 200px;
+				height: 100px;
+				/*border:1px solid #d6d6d6;*/
+				text-align: center;
+				line-height: 100px;
+				display: inline-block;
+				color: #a5a5a5;
+				;
+				font-size: 40px;
+				vertical-align: middle;
+				background-color: #ffffff;
+			}
+			
+			input[type="file"] {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 100;
+				width: 100%;
+				height: 100%;
+				filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+				filter: alpha(opacity=0);
+				-moz-opacity: 0;
+				-khtml-opacity: 0;
+				opacity: 0;
+				background: none;
+				border: none;
+				cursor: pointer;
+			}
+			
+			.delete_img {
+				position: absolute;
+				top: 100px;
+				left: 74px;
+				font-size: 16px;
+				margin-left: 10px;
+				cursor: pointer;
+				color: brown;
+				display: none;
+			}
+			
+			.table {
+				max-width: 70%;
+				text-align: center;
+				background: #FFFFFF;
+			}
+			
+			.table thead tr th {
+				text-align: center;
+			}
+			
+			.table input[type="text"] {
+				border: 0;
+				text-align: center;
+			}
+			
+			.radio.col-sm-2 {
+				text-align: center;
+			}
+			/*规格图*/
+			
+			.upfile2 {
+				position: relative;
+				width: 50px;
+				display: inline-block;
+				height: 50px;
+				margin: 15px;
+				float: left;
+			}
+			
+			.upload-img2 {
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			
+			.fileimgAccount2 {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 50px;
+				height: 50px;
+				/*border:1px solid #d6d6d6;*/
+				text-align: center;
+				/*line-height: 100px;*/
+				display: inline-block;
+				color: #a5a5a5;
+				;
+				font-size: 40px;
+				vertical-align: middle;
+				background-color: #ffffff;
+			}
+			
+			.delete_img2 {
+				position: absolute;
+				top: 52px;
+				/* left: 74px; */
+				font-size: 16px;
+				margin-left: 10px;
+				cursor: pointer;
+				color: brown;
+				display: none;
+			}
+			
+			.g_unit {
+				text-align: center;
+				margin-top: 25px;
+			}
+			
+			.table input[type="text"] {
+				text-align: center;
+				border: 1px solid #dddddd;
+				margin-top: 25px;
+			}
+			
+			.table input[type="number"] {
+				text-align: center;
+				border: 1px solid #dddddd;
+				margin-top: 25px;
+				width: 100px;
+			}
+			
+			.table input[type="button"] {
+				margin-top: 25px;
+			}
+			
+			.g_add {
+				width: 100px;
+				height: 22px;
+				margin-left: 10%;
+				border: 1px solid #337ab7;
+				background: #337ab7;
+				color: #ffffff;
+				text-align: center;
+				cursor: pointer;
+				border-radius: 10px;
+				float: left;
+			}
+			
+			.btn {
+				margin-top: 18px;
+				background-color: #337ab7;
+				color: #fff;
+			}
+			
+			select.select1 {
+				height: 35px;
+				width: 120px;
+			}
+			
+			.roll {
+				/*height: 500px;*/
+				overflow-x: hidden;
+			}
+			
+			.small-label {
+				color: #777;
+			}
+			
+			.small-input {
+				width: 50px;
+			}
+			
+			#tags {
+				display: none !important;
+			}
+			
+			.traffic {
+				width: 70%;
+				height: 500px;
+				/*border: 1px solid ;*/
+			}
+			
+			.traffic_left {
+				width: 50%;
+				height: 500px;
+				float: left;
+				border: 1px solid #c0c0c0;
+			}
+			
+			.traffic_right {
+				width: 50%;
+				height: 500px;
+				float: right;
+				border: 1px solid #c0c0c0;
+			}
+			
+			.traffic_left_top,
+			.traffic_right_top {
+				width: 100%;
+				height: 50px;
+				background-color: #337ab7;
+				text-align: center;
+				line-height: 50px;
+				color: #FFFFFF;
+				font-size: 20px;
+			}
+			
+			.traffic_left_botton,
+			.traffic_right_botton {
+				width: 100%;
+				height: 450px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="container-fluid">
+
+			<div class="col-sm-3 col-md-2 sidebar">
+				<h3>旅游后台管理</h3>
+				<ul class="nav nav-pills  nav-stacked" id="nav">
+					<li role="presentation">
+						<a href="order.html">订单管理</a>
+					</li>
+					<!--<li role="presentation">
+						<a href="logistics.html">物流管理</a>
+					</li>-->
+					<li role="presentation" class="active">
+
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							商品管理 <span class="caret "></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a id="nav_a" href="commodity.html">出售中的商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="sold_out.html">下架的商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="send_commodity.html" class="active_a">发布商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="banner.html" >首页 Banner</a>
+							</li>
+						</ul>
+					</li>
+					<li role="presentation">
+						<a href="moneyback.html">退款管理</a>
+					</li>
+					<li role="presentation">
+						<a href="javascript:void(0)" class="logout">退出系统</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main-console box">
+					<!--面包屑导航-->
+					<ol class="breadcrumb">
+						<li>商品管理</li>
+						<li class="active">发布商品</li>
+					</ol>
+
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="title" class="col-sm-1  control-label">旅游项目标题</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="title">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="outset" class="col-sm-1  control-label">出发地</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="outset">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="did" class="col-sm-1  control-label">目的地</label>
+							<div class="col-sm-4">
+								<select class="form-control stateSelect select" id="did"></select>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label">上传商品图片（banner图）</label>
+							<div class="banner col-sm-11">
+								<div class="upfile">
+									<div class="fileimgAccount">+</div>
+									<img class="upload-img img1">
+									<input type="file" class="file1" onchange="upfile(event)">
+									<input type="hidden" name="fruit" class="img_name" value="" />
+									<a onclick="delete_img(event)" class="delete_img">删除</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label">商品规格</label>
+							<div class="g_add" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">新增模版</div>
+							<div class="g_add modifier" onclick="modifier()">修改模版</div>
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">新增模版</h4>
+										</div>
+										<div class="modal-body">
+											<!--起始时间-->
+											<div class="row">
+												<div class="col-md-6">
+													<div class="col-sm-6">
+														<label for="J-xl">起始时间</label>
+													</div>
+													<div class="col-sm-6">
+														<input type="text" id="J-xl" class="J-xl" onchange="matDate(event)">
+														<input type="hidden" name="time" id="timeunix" value="">
+													</div>
+												</div>
+											</div>
+											<br />
+											<!--结束时间-->
+											<div class="row">
+												<div class="col-md-6">
+													<div class="col-sm-6">
+														<label for="J-xlb">结束时间</label>
+													</div>
+													<div class="col-sm-6">
+														<input type="text" id="J-xlb" class="J-xlb menuTime" onchange="matDate(event)">
+														<input type="hidden" name="time" id="timeunib" value="">
+													</div>
+												</div>
+											</div>
+											<br />
+											<!--行程天数-->
+											<div class="row">
+												<div class="col-md-6">
+													<div class="col-sm-6">
+														<label for="numdas">行程天数</label>
+													</div>
+													<div class="col-sm-6">
+														<input type="number" min="1" id="numdas" value="1"></input>
+													</div>
+												</div>
+											</div>
+											<br />
+											<!--套餐单人价格起点-->
+											<div class="row">
+												<div class="col-md-6">
+													<div class="col-sm-6">
+														<label for="solo">套餐单人价格起点</label>
+													</div>
+													<div class="col-sm-6">
+														<input type="number" min="1" id="solo" value="1"></input>
+													</div>
+												</div>
+											</div>
+											<br />
+											<!--库存-->
+											<div class="row">
+												<div class="col-md-6">
+													<div class="col-sm-6">
+														<label for="inventoey">库存</label>
+													</div>
+													<div class="col-sm-6">
+														<input type="number" min="1" id="inventoey" value="1"></input>
+													</div>
+												</div>
+											</div>
+											<br />
+											<!--单价-->
+											<div class="row">
+												<div class="col-md-6">
+													<div class="col-sm-6">
+														<label for="price">房间单价</label>
+													</div>
+													<div class="col-sm-6">
+														<input type="number" min="1" id="price" value="1"></input>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-primary" onclick="add_norms(event)">确定</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-sm-offset-2 col-md-offset-1 roll">
+								<div style="position: relative;top: 30px;left: 2%;" class="checkall_div">
+									<td><input type="checkbox" id="checkall" checked></td>
+									<td style="position: absolute;"><span>全选</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<!--<button id="delete">下架</button></td>-->
+								</div>
+								<table class="table" style="background-color: #FFFFFF;">
+									<thead>
+										<tr>
+											<th style="width:150px;"></th>
+											<th>出发日期</th>
+											<th>行程天数</th>
+											<th>套餐单人价格起点</th>
+											<th>库存</th>
+											<th>房间单价</th>
+											<!--<th>操作</th>-->
+										</tr>
+									</thead>
+									<tbody id="tbody1">
+
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+
+						<div class="form-group">
+							<label for="sele_id2" class="col-sm-1  control-label">产品详情</label>
+							<div class="col-sm-11">
+								<div class="form-group">
+									<label for="brand" class="col-sm-1  control-label small-label">产品品牌</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="brand" value="养你一辈子">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="tagsinput" class="col-sm-1  control-label small-label">产品标签</label>
+									<div class="col-sm-4">
+										<div class="tagsinput-primary">
+											<!--<input name="tagsinput" class="tagsinput" data-role="tagsinput" value="" />-->
+											<div style="margin:0 0 1.2em">
+												<textarea id="tags"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="feature" class="col-sm-1  control-label small-label">行程亮点</label>
+									
+									<div class="col-sm-4" class="arr_feature">
+										<input type="button" class="btn  btn-default btn_feature" name="" id="" value="增加亮点"  onclick="addfeature(event)"/>
+										<input type="hidden"  id="feature" value="" />
+									    <input type="text" class="form-control" name="features" id="departure"><br />
+									    <input type="text" class="form-control" name="features" id="departure"><br />
+										<input type="text" class="form-control" name="features" id="departure"><br />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="sele_id2" class="col-sm-1  control-label">产品概要</label>
+							<div class="col-sm-11">
+								<div class="form-group">
+									<label for="viewpoint" class="col-sm-1  control-label small-label">景点</label>
+									<div class="col-sm-4">
+										<input type="number" min="0" class=" small-input" id="viewpoint">个
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="all_team" class="col-sm-1  control-label small-label">餐饮</label>
+									<div class="col-sm-4">
+										<span>
+											<!--共 <input type="number" min="0" class=" small-input" id="all_team" > 次用餐&nbsp;&nbsp;|&nbsp;-->
+											  <input type="number" min="0" class=" small-input" id="team" > 次团餐&nbsp;&nbsp;|&nbsp;
+											   <input type="number" min="0" class=" small-input" id="self" > 次自理
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="shopping" class="col-sm-1  control-label small-label">购物</label>
+									<div class="col-sm-4">
+										<span>
+											共 <input type="number" min="0" class=" small-input" id="shopping">次购物&nbsp;&nbsp;<br />&nbsp;
+											购物地点：<input type="text" id="place">
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label">行程安排图</label>
+							<div class="banner2 col-sm-11">
+								<div class="upfile">
+									<div class="fileimgAccount">+</div>
+									<img class="upload-img img1">
+									<input type="file" class="file1" onchange="upfile(event)">
+									<input type="hidden" name="fruit" class="img_name" value="" />
+									<a onclick="delete_img(event)" class="delete_img">删除</a>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-1 control-label">交通信息</label>
+							<div class="banner2 col-sm-11">
+								<div class="traffic">
+									<div class="traffic_left ">
+										<div class="traffic_left_top">去程</div>
+										
+										<div class="traffic_left_botton traffics">
+											<input type="hidden" id="go_type" value="1" />
+											<div class="form-group">
+												<label for="vehicle" class="col-sm-3 control-label small-label">交通工具</label>
+												<div class="col-sm-6">
+													<select class="form-control stateSelect select vehicle" id="vehicle">
+														<option value="1">飞机</option>
+														<option value="2">火车高铁</option>
+														<option value="3">汽车</option>
+														<option value="4">游轮</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="departure" class="col-sm-3 control-label small-label">出发地</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="departure">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="departure" class="col-sm-3 control-label small-label">出发时间</label>
+												<div class="col-sm-6">
+													<input type="text" id="J-xlc" class="form-control J-xlc menuTime" onchange="matDate(event)">
+													<input type="hidden" name="time" id="timeunic">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="destination" class="col-sm-3 control-label small-label">目的地</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="destination">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="arrival time" class="col-sm-3 control-label small-label">到达时间</label>
+												<div class="col-sm-6">
+													<input type="text" id="J-xld" class="form-control J-xld menuTime" onchange="matDate(event)">
+													<input type="hidden" name="time" id="timeunid">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="facilitator" class="col-sm-3 control-label small-label">服务商信息</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="facilitator">
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="traffic_right ">
+										<div class="traffic_right_top">返程</div>
+										<div class="traffic_right_botton traffics">
+											<input type="hidden" name="type" id="return_type" value="2" />
+											<div class="form-group">
+												<label for="vehicle2" class="col-sm-3 control-label small-label">交通工具</label>
+												<div class="col-sm-6">
+													<select class="form-control stateSelect select" id="vehicle2">
+														<option value="1">飞机</option>
+														<option value="2">火车高铁</option>
+														<option value="3">汽车</option>
+														<option value="4">游轮</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="departure2" class="col-sm-3 control-label small-label">出发地</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="departure2">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="departure2" class="col-sm-3 control-label small-label">出发时间</label>
+												<div class="col-sm-6">
+													<input type="text" id="J-xlc2" class="form-control J-xlc2 menuTime" onchange="matDate(event)">
+													<input type="hidden" name="time" id="timeunic2">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="destination2" class="col-sm-3 control-label small-label">目的地</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="destination2">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="arrival time2" class="col-sm-3 control-label small-label">到达时间</label>
+												<div class="col-sm-6">
+													<input type="text" id="J-xld2" class="form-control J-xld2 menuTime" onchange="matDate(event)">
+													<input type="hidden" name="time" id="timeunid2">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="facilitator2" class="col-sm-3 control-label small-label">服务商信息</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="facilitator2">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="hotel_information" class="col-sm-1  control-label">酒店信息</label>
+							<div class="col-sm-11">
+								<div class="form-group">
+									<label for="hotel_name" class="col-sm-1  control-label small-label">酒店名称</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="hotel_name">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="hotel_describe" class="col-sm-1  control-label small-label">酒店描述</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="hotel_describe">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="tickets_information" class="col-sm-1  control-label">门票信息</label>
+							<div class="col-sm-11">
+								<div class="form-group">
+									<label for="tickets_name" class="col-sm-1  control-label small-label">门票名称</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="tickets_name">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="tickets_describe" class="col-sm-1  control-label small-label">门票描述</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="tickets_describe">
+									</div>
+								</div>
+							</div>
+						</div>
+
+                        <div class="form-group">
+							<label for="safe" class="col-sm-1  control-label">保险信息</label>
+							<div class="col-sm-11">
+								<div class="form-group">
+									<label for="safeName" class="col-sm-1  control-label small-label">保险项目名</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="safeName">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="safePrice" class="col-sm-1  control-label small-label">保险价格</label>
+									<div class="col-sm-4">
+										<input type="number" min="1" class="form-control" id="safePrice">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="safeDesc" class="col-sm-1  control-label small-label">保险项目描述</label>
+									<div class="col-sm-4">
+										<textarea style="padding: 10px;" id="safeDesc" rows="5" cols="50" placeholder=""></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-default affirm btn_send" > 确认发布</button>
+					</form>
+
+				</div>
+			</div>
+
+		</div>
+		<textarea id="template" style="display:none">
+			{#template MAIN}
+			    {#foreach  $T as entry}
+			    <tr>
+					<td>
+					   <input type="checkbox"  value="{$T.entry.id}" checked>
+					    <input type="hidden" id="norms_object" name="norms_object" value='{JSON.stringify($T)}' />
+					</td>
+					<td>
+					    <input type="text" name="norms" class="g_timer" value="{UnixToDate($T.entry.startTime)}" disabled/>
+					</td>
+					
+					<td><input type="number" min="1" name="norms" class="g_numdas" value="{$T.entry.num}" disabled><p>(不能为0)</p></td>
+					<td><input type="number" min="1" name="norms" class="g_solo" value="{$T.entry.price}" disabled><p>(不能为0)</p></td>
+					<td><input type="number" min="1" name="norms" class="g_inventoey" value="{$T.entry.stock}" disabled><p>(不能为0)</p></td>
+					<td><input type="number" min="1" name="norms" class="g_price" value="{$T.entry.money}" disabled><p>(不能为0)</p></td>
+				</tr>
+				{#/for} 
+				 <input type="hidden" id="get_object" name="get_object" value='{JSON.stringify($T)}' />
+			{#/template MAIN}    
+		</textarea>
+	</body>
+
+</html>

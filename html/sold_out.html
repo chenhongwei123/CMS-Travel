@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>下架的商品</title>
+		<link rel="stylesheet" type="text/css" href="../css/PCreset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/lib/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../css/lib/sweetalert.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+
+		<script src="../js/lib/jQuery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/bootstrap/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery.cookie.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery-time.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery-jtemplates.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/sweetalert/sweetalert-dev.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/sold_out.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+
+		<div class="container-fluid">
+
+			<div class="col-sm-3 col-md-2 sidebar">
+				<h3>旅游后台管理</h3>
+				<ul class="nav nav-pills  nav-stacked" id="nav">
+					<li role="presentation">
+						<a href="order.html">订单管理</a>
+					</li>
+					<!--<li role="presentation">
+						<a href="logistics.html">物流管理</a>
+					</li>-->
+					<li role="presentation" class="active">
+
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							商品管理 <span class="caret "></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a id="nav_a" href="commodity.html">出售中的商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="sold_out.html" class="active_a">下架的商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="send_commodity.html">发布商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="banner.html" >首页 Banner</a>
+							</li>
+						</ul>
+					</li>
+					<li role="presentation">
+						<a href="moneyback.html">退款管理</a>
+					</li>
+					<li role="presentation">
+						<a href="javascript:void(0)" class="logout">退出系统</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main-console box">
+					<!--面包屑导航-->
+					<ol class="breadcrumb">
+						<li>商品管理</li>
+						<li class="active">下架的商品</li>
+					</ol>
+					<a class="btn" href="commodity.html">进入出售中的商品列表</a>
+					<div style="position: relative;top: 30px;left: 2.2%;" class="checkall_div">
+						<td><input type="checkbox" id="checkall"></td>
+						<td style="position: absolute;"><span>全选</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="delete">上架</button></td>
+					</div>
+					<table class="table" style="background-color: #FFFFFF;">
+
+						<thead>
+							<tr>
+								<th></th>
+								<th>宝贝名称</th>
+								<th>数据id</th>
+								<th>价格</th>
+								<th>库存</th>
+								<th>总销量</th>
+								<th>发布时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+
+						<tbody id="tbody1">
+
+						</tbody>
+
+					</table>
+					<!--分页-->
+					<div id="Paging">
+						<input type="button" id="PrevPage" value="上一页" />
+						<input type="button" id="NextPage" value="下一页">
+						<input type="text" value="0" style="display: none;" id="dishpageval" />
+						<div id="pagination">
+							<span>第</span>
+							<b id="change">1</b>
+							<span>页</span>
+							<span>/</span>
+							<span> 共 <b id="all_change"></b> 页 </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<textarea id="template" style="display:none">
+			{#template MAIN}
+			    {#foreach $T as entry}
+				    
+					<tr>
+						<td><input type="checkbox" name="fruit" value="{$T.entry.id}"></td>
+						<td style="width:300px;">
+							<!--<img src="../img/raw_1497493914.png" />-->
+							<span style='width: 20px;color: #1E88E5;word-wrap:break-word;'>{$T.entry.title}</span>
+						</td>
+						<td>{$T.entry.id}</td>
+						<td>{to_Fixed($T.entry.price)}</td>
+						<td>{$T.entry.stock}</td>
+						<td>{$T.entry.sales}</td>
+						<td>{formatDate($T.entry.time)}</td>
+						<td><a class="btn" onclick="btn_href({$T.entry.id})">编辑</a></td>
+						<!--<a onclick="click_Storage(event)" href="send-out.html" class="btn">发货</a>-->
+					</tr>
+			    
+				{#/for}   
+			{#/template MAIN}    
+	</body>
+
+</html>

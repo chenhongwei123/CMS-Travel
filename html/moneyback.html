@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>退货管理</title>
+		<link rel="stylesheet" type="text/css" href="../css/PCreset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/lib/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../css/lib/sweetalert.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+
+		<script src="../js/lib/jQuery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery.cookie.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery-time.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/bootstrap/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/jQuery/jquery-jtemplates.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/sweetalert/sweetalert-dev.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/moneyback.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.nav-tabs>li>a:hover,
+			.nav-tabs>li>a:focus {
+				text-decoration: none;
+				background-color: #eee;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<div class="container-fluid">
+
+			<div class="col-sm-3 col-md-2 sidebar">
+				<h3>旅游后台管理</h3>
+				<ul class="nav nav-pills  nav-stacked" id="nav">
+					<li role="presentation">
+						<a href="order.html">订单管理</a>
+					</li>
+					<!--<li role="presentation" >
+						<a href="logistics.html">物流管理</a>
+					</li>-->
+					<li role="presentation">
+
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							商品管理 <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a id="nav_a" href="commodity.html">出售中的商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="sold_out.html">下架的商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="send_commodity.html">发布商品</a>
+							</li>
+							<li>
+								<a id="nav_a" href="banner.html" >首页 Banner</a>
+							</li>
+						</ul>
+					</li>
+					<li role="presentation" class="active">
+						<a href="moneyback.html">退款管理</a>
+					</li>
+					<li role="presentation">
+						<a href="javascript:void(0)" class="logout">退出系统</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main-console box">
+					<!--面包屑导航-->
+					<ol class="breadcrumb">
+						<li class="active">退货管理</li>
+					</ol>
+
+					<div class="row">
+
+						<!--表格数据-->
+						<div class="col-md-12">
+							<div class="bs-example" data-example-id="condensed-table">
+								<br /><br />
+								<table class="table table-hover">
+									<ul class="nav nav-tabs">
+										<li role="presentation" class="active">
+											<a href="#">申请退款订单</a>
+										</li>
+										<li role="presentation">
+											<a href="#">已退款订单</a>
+										</li>
+									</ul>
+									<thead>
+										<tr>
+											<th>退款编号</th>
+											<th>订单编号</th>
+											<th>买家</th>
+											<th>交易金额</th>
+											<th>退款金额</th>
+											<th>申请时间</th>
+											<th>退款状态</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody id="tbody1">
+
+									</tbody>
+								</table>
+								<!--分页1-->
+								<div id="Paging">
+									<input type="button" id="PrevPage" value="上一页" />
+									<input type="button" id="NextPage" value="下一页">
+									<input type="text" value="0" style="display: none;" id="dishpageval" />
+									<div id="pagination">
+										<span>第</span>
+										<b id="change">1</b>
+										<span>页</span>
+										<span>/</span>
+										<span> 共 <b id="all_change"></b> 页 </span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--表格模版-->
+		<textarea id="template" style="display:none">
+			{#template MAIN}
+			    {#foreach $T as entry}
+				    <tr>
+                        <td>{xs_null($T.entry.code)}</td>
+                        <td>{xs_null($T.entry.sn)}</td>
+						<td>{xs_null($T.entry.name)}</td>
+						<td>{to_Fixed($T.entry.price)}</td>
+						<td>{to_Fixed($T.entry.money)}</td>
+						<td>{formatDate($T.entry.refundTime)}</td>
+						<td>{state($T.entry.state)}</td>
+						
+						   {#if $T.entry.state==4}
+						                         <td>
+						   	                         <a onclick="operation({$T.entry.id}, 1)" class="btn btn_a">同意</a>
+						   	                         <a onclick="operation({$T.entry.id}, 2)" class="btn btn_a">不同意</a>
+						                         </td> 
+							    {#elseif $T.entry.state==5} <td><a class="btn">退款完成</a></td> 
+							    {#else} <td></td>
+						   {#/if}
+						   
+					</tr>
+			     {#/for}   
+			{#/template MAIN}
+			
+		</textarea>
+	</body>
+
+</html>
