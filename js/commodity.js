@@ -34,16 +34,22 @@ function bjps() {
 		dataType: "json",
 		data: {
 			"start": 0,
-			'type':1, 
+			'type': 1,
 			"size": 10
 		},
 		success: function(data) {
+			//			data.forEach((xx) =>{
+			//				console.log(xx)
+			//			})
 			console.log(data)
 			var jsondata = data.data.objs;
+			jsondata.forEach((xx) => {
+				console.log(xx)
+			})
 			console.log(jsondata)
-			
-			$("#all_change").text(Math.ceil((data.data.total)/10))         //总共页数
-			
+
+			$("#all_change").text(Math.ceil((data.data.total) / 10)) //总共页数
+
 			$("#collect").html(data.data.total)
 			$("#turnover").html(data.data.turnover)
 			$("#orderCount").html(data.data.count)
@@ -90,7 +96,7 @@ function orders_paging() {
 			url: urly("admin/tours.tour"),
 			data: {
 				"start": dishstart,
-				'type':1, 
+				'type': 1,
 				"size": 10
 			},
 			dataType: "json",
@@ -99,7 +105,7 @@ function orders_paging() {
 				"token": $.cookie("token")
 			},
 			success: function(data) {
-							console.log(data)
+				console.log(data)
 				var jsondata = data.data.objs;
 
 				$("#tbody1").setTemplateElement("template");
@@ -136,7 +142,7 @@ function orders_paging() {
 			data: {
 
 				"start": dishstart,
-				'type':1, 
+				'type': 1,
 				"size": 10
 			},
 			dataType: "json",
@@ -167,7 +173,7 @@ function orders_paging() {
 			}
 		});
 	}); //上一页
-} 
+}
 //----------------------------下架-------------------------------------------
 function del(new_arr) {
 	console.log(new_arr)
@@ -216,7 +222,7 @@ function del(new_arr) {
 		});
 	}
 
-}//------------------------------------------------点击跳转-------------------
-function btn_href(id){
-	window.location.href="edit_commodity.html?goodsID=" +encodeURI(id);
+} //------------------------------------------------点击跳转-------------------
+function btn_href(id) {
+	window.location.href = "edit_commodity.html?goodsID=" + encodeURI(id);
 }

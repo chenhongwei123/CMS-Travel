@@ -22,7 +22,6 @@ function orderDetail(id) {
 			switch(JSON.stringify(data.code)) {
 				case '"A00000"':
                     console.log(data.data)
-                   
                     
                     var arr=data.data 
 					$(".buyer").setTemplateElement("template2");
